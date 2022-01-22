@@ -1,0 +1,128 @@
+<div class="container">
+  <h1 style="text-align: center">Schema Editor</h1>
+  <div *ngFor="let section of sections; let sectionIndex = index">
+    <mat-card style="text-align: center; margin: 10px">
+      <div class="row">
+        <button mat-icon-button (click)="moveSectionUp(sectionIndex)">
+          <mat-icon>keyboard_arrow_up</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="moveSectionDown(sectionIndex)"
+          class="sectionArrow"
+        >
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-form-field appearance="fill" style="margin-right: 10px">
+          <mat-label>Prefix</mat-label>
+          <input
+            matInput
+            [defaultValue]="section.prefix"
+            type="text"
+            (change)="section.prefix = eventToString($event)"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="margin-right: 10px">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            [defaultValue]="section.title"
+            type="text"
+            (change)="section.title = eventToString($event)"
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="removeSection(sectionIndex)"
+        >
+          Remove Section
+        </button>
+      </div>
+
+      <hr style="margin-bottom: 30px" />
+
+      <div
+        *ngFor="let widget of section.widgets; let widgetIndex = index"
+        class="row"
+      >
+        <button
+          mat-icon-button
+          (click)="moveWidgetUp(widgetIndex, sectionIndex)"
+        >
+          <mat-icon>keyboard_arrow_up</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="moveWidgetDown(widgetIndex, sectionIndex)"
+        >
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+
+        <mat-form-field appearance="fill" style="margin-right: 10px">
+          <mat-label>Key</mat-label>
+          <input
+            matInput
+            [defaultValue]="widget.key"
+            type="text"
+            (change)="widget.key = eventToString($event)"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="margin-right: 10px">
+          <mat-label>Label</mat-label>
+          <input
+            matInput
+            [defaultValue]="widget.label"
+            type="text"
+            (change)="widget.label = eventToString($event)"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="margin-right: 10px">
+          <mat-label>Type</mat-label>
+          <mat-select
+            (selectionChange)="widget.type = $event.value"
+            [value]="widget.type"
+          >
+            <mat-option value="Timer">Timer</mat-option>
+            <mat-option value="Counter">Counter</mat-option>
+            <mat-option value="Toggle">Toggle</mat-option>
+            <mat-option value="Text">Text</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="removeWidget(widgetIndex, sectionIndex)"
+        >
+          Remove Widget
+        </button>
+      </div>
+
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="addWidget(section)"
+        style="width: 100%"
+      >
+        Add Widget
+      </button>
+    </mat-card>
+  </div>
+
+  <mat-card style="text-align: center">
+    <button mat-raised-button color="accent" (click)="addSection()">
+      Add Section
+    </button>
+  </mat-card>
+
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="update()"
+    style="width: 100%; margin: auto; text-align: center; margin-top: 15px"
+  >
+    Update Schema
+  </button>
+</div>

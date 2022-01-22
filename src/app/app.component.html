@@ -1,0 +1,35 @@
+<div class="root">
+  <mat-toolbar>
+    <button
+      mat-icon-button
+      *ngIf="authentication.signedIn; else login"
+      (click)="authentication.signOut()"
+    >
+      <img
+        [src]="authentication.user?.photoURL ?? '/resources/anonymous.png'"
+        height="100%"
+        width="100%"
+      />
+    </button>
+    <ng-template #login>
+      <button mat-icon-button (click)="authentication.signIn()">
+        <mat-icon>login</mat-icon>
+      </button>
+    </ng-template>
+    <a class="app-title" routerLink="form">Scouting</a>
+    <div style="flex-grow: 1"></div>
+    <button mat-icon-button routerLink="fun-zone">
+      <mat-icon>celebration</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      routerLink="admin-panel"
+      *ngIf="authentication.isAdmin"
+    >
+      <mat-icon>admin_panel_settings</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

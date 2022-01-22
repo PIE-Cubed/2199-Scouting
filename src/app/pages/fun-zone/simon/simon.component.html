@@ -1,0 +1,37 @@
+<div id="root">
+  <h1 style="text-align: center">Simon</h1>
+  <div style="flex-direction: row">
+    <h2 id="score">Score: {{ score }}</h2>
+    <h2>High Score: {{ highScore }}</h2>
+    <button mat-raised-button color="primary" (click)="start()">
+      Start Game
+    </button>
+  </div>
+  <div style="padding: 20px">
+    <div class="row">
+      <div
+        #topLeft
+        (click)="panelClicked('top-left-panel')"
+        class="top-left-panel panel"
+      ></div>
+      <div
+        #topRight
+        (click)="panelClicked('top-right-panel')"
+        class="top-right-panel panel"
+      ></div>
+    </div>
+
+    <div class="row">
+      <div
+        #bottomLeft
+        (click)="panelClicked('bottom-left-panel')"
+        class="bottom-left-panel panel"
+      ></div>
+      <div
+        #bottomRight
+        (click)="panelClicked('bottom-right-panel')"
+        class="bottom-right-panel panel"
+      ></div>
+    </div>
+  </div>
+</div>

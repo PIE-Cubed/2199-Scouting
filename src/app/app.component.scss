@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  background-color: white;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #333333;
+  }
+
+  .content {
+    height: 100vh;
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.app-title {
+  text-decoration: none;
+  color: inherit;
+  padding: 0 10px;
+}

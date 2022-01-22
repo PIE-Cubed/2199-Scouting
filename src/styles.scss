@@ -1,0 +1,156 @@
+// Custom Theming for Angular materialerial
+// For more informaterialion: https://materialerial.angular.io/guide/theming
+@use "@angular/material" as material;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular materialerial. We include this here so that you only
+// have to load a single css file for Angular materialerial in your app.
+// Be sure that you only ever include this mixin once!
+@include material.core();
+
+// Define the palettes for your theme using the materialerial Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://materialerial.io/design/color/
+
+$scouting-primary-scheme: (
+  100: #fae4bc,
+  500: #eda41e,
+  700: #e58912,
+  contrast: (
+    100: rgba(0, 0, 0, 0.87),
+    500: rgba(0, 0, 0, 0.87),
+    700: #ffffff,
+  ),
+);
+$scouting-accent-scheme: (
+  100: #61061a,
+  500: #7e0c2b,
+  700: #d8b6bf,
+  contrast: (
+    100: rgba(0, 0, 0, 0.87),
+    500: #ffffff,
+    700: #ffffff,
+  ),
+);
+
+$scouting-primary: material.define-palette($scouting-primary-scheme);
+$scouting-accent: material.define-palette($scouting-accent-scheme);
+
+// The warn palette is optional (defaults to red).
+$scouting-warn: material.define-palette(material.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$scouting-light-theme: material.define-light-theme(
+  (
+    color: (
+      primary: $scouting-primary,
+      accent: $scouting-accent,
+      warn: $scouting-warn,
+    ),
+  )
+);
+
+$scouting-dark-theme: material.define-dark-theme(
+  (
+    color: (
+      primary: $scouting-primary,
+      accent: $scouting-accent,
+      warn: $scouting-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include material.all-component-themes($scouting-light-theme);
+@media (prefers-color-scheme: dark) {
+  @include material.all-component-colors($scouting-dark-theme);
+
+  body {
+    background-color: #333;
+  }
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f5f5;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #212121;
+    color: white;
+  }
+}
+
+.button-bar {
+  height: 36px;
+  display: flex;
+
+  button:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+  }
+  button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  button:disabled {
+    border-color: rgba(0, 0, 0, 0.12);
+
+    @media (prefers-color-scheme: dark) {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+mat-form-field {
+  max-width: 100%;
+}
+
+mat-toolbar {
+  min-height: 56px;
+  max-height: 56px;
+}
+
+.mat-form-field-wrapper {
+  padding: 0;
+}
+
+.mat-form-field-underline {
+  bottom: 0;
+}
+
+.container {
+  width: 70vw;
+
+  @media (max-width: 600px) {
+    width: 90vw;
+  }
+}

@@ -1,0 +1,45 @@
+.panel {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  cursor: pointer;
+  border-color: transparent;
+  transition: 100ms ease-in-out;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  text-align: center;
+}
+
+.panel:hover {
+  filter: brightness(60%);
+}
+
+.bottom-right-panel {
+  border-bottom-right-radius: 90%;
+  background-color: red;
+}
+
+.bottom-left-panel {
+  border-bottom-left-radius: 90%;
+  background-color: blue;
+}
+
+.top-right-panel {
+  border-top-right-radius: 90%;
+  background-color: green;
+}
+
+.top-left-panel {
+  border-top-left-radius: 90%;
+  background-color: yellow;
+}
+
+.active {
+  background-color: white;
+}

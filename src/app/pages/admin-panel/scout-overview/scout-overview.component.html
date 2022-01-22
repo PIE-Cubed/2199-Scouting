@@ -1,0 +1,66 @@
+<div class="topPart container">
+  <h1>Scout Overview</h1>
+  <button mat-raised-button color="primary" (click)="fetchAllScouts()">
+    Fetch All Scouts
+  </button>
+  <mat-form-field
+    appearance="fill"
+    style="margin-bottom: 10px; margin-top: 10px"
+  >
+    <mat-select (selectionChange)="team = $event.value">
+      <mat-option *ngFor="let team of allTeamsWithScouts" value="{{ team }}">{{
+        team
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button
+    mat-flat-button
+    routerLink="/admin-panel/scout-overview/team"
+    [queryParams]="{ number: team }"
+  >
+    View Team Scouts
+  </button>
+
+  <br />
+  <h2>Invalid / Missing Scouts</h2>
+  <mat-form-field appearance="fill" style="margin-bottom: 10px">
+    <mat-label>Stage</mat-label>
+    <mat-select (selectionChange)="stage = $event.value; findMissingScouts()">
+      <mat-option value="pr">Practice</mat-option>
+      <mat-option value="qm">Qualifications</mat-option>
+      <mat-option value="qf">Quarterfinals</mat-option>
+      <mat-option value="sf">Semifinals</mat-option>
+      <mat-option value="f">Finals</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<table
+  mat-table
+  [dataSource]="daraSource"
+  class="table"
+  *ngIf="showTable"
+  style="margin: auto"
+  class="container"
+>
+  <ng-container matColumnDef="missingScouts">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center">
+      Missing Scouts
+    </th>
+    <td mat-cell *matCellDef="let element" style="text-align: center">
+      {{ element.missing }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="incorrectScouts">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center">
+      Incorrect Scouts
+    </th>
+    <td mat-cell *matCellDef="let element" style="text-align: center">
+      {{ element.incorrect }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
